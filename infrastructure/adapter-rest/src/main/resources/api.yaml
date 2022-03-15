@@ -1,0 +1,221 @@
+openapi: 3.0.3
+info:
+  title: Products
+  description: API to manage the products
+  version: 1.0.0
+  contact:
+    name: "Juan Carlos Rodicio"
+    email: "jcarlosrodicio@gmail.com"
+servers:
+  - url: 'http://localhost:8080'
+
+tags:
+  - name: Product
+    description: CRUD of products
+paths:
+  '/product':
+    get:
+      tags:
+        - Product
+      operationId: getProducts
+      summary: "Allows get a list of products"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+    post:
+      tags:
+        - Product
+      operationId: addProduct
+      summary: "Create an product"
+      requestBody:
+        description: product to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+    delete:
+      tags:
+        - Product
+      operationId: removeProduct
+      summary: "Remove an product"
+      requestBody:
+        description: product to removed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+  '/product/{productId}':
+    get:
+      tags:
+        - Product
+      operationId: getProductById
+      summary: "Allows get an product"
+      parameters:
+        - $ref: '#/components/parameters/productId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
+components:
+  responses:
+    BadRequest:
+      description: "Bad request"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductError'
+    UnsupportedMediaType:
+      description: "Unsupported Media Type"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductError'
+    ServiceUnavailable:
+      description: "Service unavailable"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductError'
+    GatewayTimeout:
+      description: "Too Many Requests"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductError'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductError'
+  parameters:
+    productId:
+      in: query
+      name: productId
+      description: "Allows filtering by product"
+      required: true
+      schema:
+        type: integer
+        format: int32
+      example: 35455
+  schemas:
+    Products:
+      type: object
+      additionalProperties: false
+      properties:
+        products:
+          type: array
+          description: list of products
+          items:
+            $ref: '#/components/schemas/Product'
+          maxItems: 1000
+    Product:
+      type: object
+      description: "Data structure containing product information."
+      properties:
+        id:
+          $ref: '#/components/schemas/productId'
+        brandId:
+          $ref: '#/components/schemas/name'
+        startDate:
+          $ref: '#/components/schemas/description'
+    productId:
+      type: string
+      description: 'product type code'
+      example: "1"
+    name:
+      type: string
+      description: 'name of product'
+      example: "Product Name"
+    description:
+      type: string
+      description: 'description of product'
+      example: "This is a description test"
+    ProductError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDataError'
+    ProductDataError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Unique alphanumeric human readable error code
+          example: "Error code"
+        message:
+          type: string
+          description: Brief summary of issue reported
+          example: "Error description"
+        level:
+          type: string
+          description: 'Different issue level: info, warning, error'
+          example: "ErrorLevel error"
+        description:
+          type: string
+          description: 'Detailed description of the issue reported'
+          example: "Error message"
