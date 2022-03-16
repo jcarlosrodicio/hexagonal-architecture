@@ -3,18 +3,14 @@ package eteosf.hexagonal.application.service.adapter;
 import eteosf.hexagonal.application.service.api.ProductService;
 import eteosf.hexagonal.domain.model.Product;
 import eteosf.hexagonal.domain.spi.ProductPersistencePort;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class ProductServiceAdapter implements ProductService {
 
     private final ProductPersistencePort productPersistencePort;
-
-    @Autowired
-    public ProductServiceAdapter(ProductPersistencePort productPersistencePort) {
-        this.productPersistencePort = productPersistencePort;
-    }
 
     @Override
     public void addProduct(Product product) {

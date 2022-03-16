@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class SpringDataJpaAdapterConfiguration {
 
     @Bean
-    public ProductPersistencePort getProductPersistencPort(ProductRepository productRepository, ProductMapper mapper) {
+    public ProductPersistencePort getProductPersistencePort(ProductRepository productRepository, ProductMapper mapper) {
         return new ProductSpringJpaAdapter(productRepository, mapper);
     }
 }
