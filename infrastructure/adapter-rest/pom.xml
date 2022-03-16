@@ -78,8 +78,8 @@
                                 ${project.basedir}/src/main/resources/api.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>com.zara.price.api</apiPackage>
-                            <modelPackage>com.zara.price.model</modelPackage>
+                            <apiPackage>eteosf.hexagonal.infrastructure.api</apiPackage>
+                            <modelPackage>eteosf.hexagonal.infrastructure.model</modelPackage>
                             <configOptions>
                                 <dateLibrary>java11</dateLibrary>
                                 <java8>true</java8>

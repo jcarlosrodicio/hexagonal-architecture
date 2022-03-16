@@ -1,7 +1,7 @@
 package eteosf.hexagonal.infrastructure.rest.mapper;
 
-import com.zara.price.model.ProductDTO;
 import eteosf.hexagonal.domain.model.Product;
+import eteosf.hexagonal.infrastructure.model.ProductDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

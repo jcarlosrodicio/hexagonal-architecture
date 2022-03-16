@@ -175,11 +175,11 @@ components:
       type: object
       description: "Data structure containing product information."
       properties:
-        id:
+        productId:
           $ref: '#/components/schemas/productId'
-        brandId:
+        name:
           $ref: '#/components/schemas/name'
-        startDate:
+        description:
           $ref: '#/components/schemas/description'
     productId:
       type: string

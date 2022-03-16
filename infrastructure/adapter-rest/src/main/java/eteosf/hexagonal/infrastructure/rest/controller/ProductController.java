@@ -1,13 +1,11 @@
 package eteosf.hexagonal.infrastructure.rest.controller;
 
-import com.zara.price.api.ProductApi;
-import com.zara.price.model.ProductDTO;
-import com.zara.price.model.ProductsDTO;
 import eteosf.hexagonal.application.service.api.ProductService;
-import eteosf.hexagonal.domain.model.Product;
+import eteosf.hexagonal.infrastructure.api.ProductApi;
+import eteosf.hexagonal.infrastructure.model.ProductDTO;
+import eteosf.hexagonal.infrastructure.model.ProductsDTO;
 import eteosf.hexagonal.infrastructure.rest.mapper.ProductDTOMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,13 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.stream.Collectors;
 
 @RestController
+@AllArgsConstructor
 public class ProductController implements ProductApi {
 
-    @Autowired
-    private ProductService service;
+    private final ProductService service;
 
-    @Autowired
-    private ProductDTOMapper mapper;
+    private final ProductDTOMapper mapper;
 
     @Override
     public ResponseEntity<ProductsDTO> getProducts() {

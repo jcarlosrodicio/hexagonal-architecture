@@ -2,6 +2,7 @@ package eteosf.hexagonal.persistence.jpa.config;
 
 import eteosf.hexagonal.domain.spi.ProductPersistencePort;
 import eteosf.hexagonal.persistence.jpa.adapter.ProductSpringJpaAdapter;
+import eteosf.hexagonal.persistence.jpa.mapper.ProductMapper;
 import eteosf.hexagonal.persistence.jpa.repository.ProductRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class SpringDataJpaAdapterConfiguration {
 
     @Bean
-    public ProductPersistencePort getProductPersistencPort(ProductRepository productRepository) {
-        return new ProductSpringJpaAdapter(productRepository);
+    public ProductPersistencePort getProductPersistencPort(ProductRepository productRepository, ProductMapper mapper) {
+        return new ProductSpringJpaAdapter(productRepository, mapper);
     }
 }
