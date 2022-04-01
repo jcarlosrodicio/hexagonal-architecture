@@ -19,6 +19,7 @@
     <modules>
         <module>adapter-persistence-spring-data-jpa</module>
         <module>adapter-rest</module>
+        <module>bootloader</module>
     </modules>
 
 </project>
